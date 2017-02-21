@@ -11,12 +11,18 @@ namespace BL.DTO.FiveDayForecastDTO
 
         public FiveDayForecastDTO(FiveDayForecast weather)
         {
-            this.City = weather.Location.City;
-            this.WeatherInfos = new List<ThreeHourForecastDTO>();
-
-            foreach (var time in weather.ThreeHourForecasts)
+            if (weather != null)
             {
-                this.WeatherInfos.Add(new ThreeHourForecastDTO(time));
+                this.City = weather.Location.City;
+                this.WeatherInfos = new List<ThreeHourForecastDTO>();
+
+                if (weather.ThreeHourForecasts != null)
+                {
+                    foreach (var time in weather.ThreeHourForecasts)
+                    {
+                        this.WeatherInfos.Add(new ThreeHourForecastDTO(time));
+                    }
+                }
             }
         }
     }

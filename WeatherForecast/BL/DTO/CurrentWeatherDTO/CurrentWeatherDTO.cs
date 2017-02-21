@@ -18,12 +18,15 @@ namespace BL.DTO.CurrentWeatherDTO
 
         public CurrentWeatherDTO(CurrentWeather weather)
         {
-            this.City = weather.City.Name;
-            this.Humidity = weather.Humidity.Value;
-            this.Icon = weather.Weather.Icon;
-            this.Pressure = weather.Pressure.Value;
-            this.Temperature = weather.Temperature.Value;
-            this.WindSpeed = weather.WindCharacteristics.Speed.Value;
+            if (weather != null)
+            {
+                this.City = weather.City.Name;
+                this.Humidity = weather.Humidity.Value;
+                this.Icon = weather.Weather.Icon;
+                this.Pressure = weather.Pressure.Value;
+                this.Temperature = weather.Temperature.Value;
+                this.WindSpeed = weather.WindCharacteristics.Speed.Value;
+            }
         }
     }
 }

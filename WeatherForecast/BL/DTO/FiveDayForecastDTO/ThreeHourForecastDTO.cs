@@ -21,13 +21,16 @@ namespace BL.DTO.FiveDayForecastDTO
 
         public ThreeHourForecastDTO(ThreeHourForecast time)
         {
-            this.Date = time.From;
-            this.Humidity = time.Humidity.Value;
-            this.Icon = time.Symbol.Var;
-            this.Pressure = time.Pressure.Value;
-            this.TemperatureMax = time.Temperature.Max;
-            this.TemperatureMin = time.Temperature.Min;
-            this.WindSpeed = time.WindSpeed.ValueForecast;
+            if (time != null)
+            {
+                this.Date = time.From;
+                this.Humidity = time.Humidity.Value;
+                this.Icon = time.Symbol.Var;
+                this.Pressure = time.Pressure.Value;
+                this.TemperatureMax = time.Temperature.Max;
+                this.TemperatureMin = time.Temperature.Min;
+                this.WindSpeed = time.WindSpeed.ValueForecast;
+            }
         }
     }
 }
