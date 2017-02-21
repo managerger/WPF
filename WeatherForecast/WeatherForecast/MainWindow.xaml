@@ -1,0 +1,136 @@
+﻿<Window x:Class="WeatherForecast.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeatherForecast"
+        xmlns:viewModels="clr-namespace:ViewModel.WeatherViewModels;assembly=ViewModel"
+        xmlns:converters="clr-namespace:WeatherForecast.Converters"
+        xmlns:controls="clr-namespace:WeatherForecast.Controls"
+        mc:Ignorable="d"
+        Title="Weather" Height="600" MinHeight="600" Width="900" MinWidth="900" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converters:InstanceToVisibility x:Key="ForeCastToBool"/>
+        <Style TargetType="TextBlock">
+            <Setter Property = "BitmapEffect" >
+                <Setter.Value>
+                    <DropShadowBitmapEffect Color="Black" Direction="120"  
+                    ShadowDepth="3" Softness="1" Opacity="0.9"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="5 0 5 0" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <Button Command="{Binding AddCommand}" Grid.Row="0" Content="Add City" Margin="400 2 400 2"/>
+            <TextBox Text="{Binding CityName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="400 2 400 2"/>
+        </Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Path=CitiesWeather}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CurrentWeatherControl/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <TextBlock Text="{Binding ForecastWeather.CityName}" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <TabControl DataContext="{Binding ForecastWeather}" Grid.Row="3" HorizontalAlignment="Center" BorderThickness="0" 
+                    Visibility="{Binding RelativeSource={RelativeSource Self}, Path=DataContext, Converter={StaticResource ForeCastToBool}}">
+
+            <TabItem Header="{Binding Today}">
+                <ItemsControl ItemsSource="{Binding Path=WeatherToday}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:ForecastWeatherControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+
+            <TabItem Header="{Binding FirstDay}">
+                <ItemsControl ItemsSource="{Binding Path=WeatherFirstDay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:ForecastWeatherControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+
+            <TabItem Header="{Binding SecondDay}">
+                <ItemsControl ItemsSource="{Binding Path=WeatherSecondDay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:ForecastWeatherControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+
+            <TabItem Header="{Binding ThirdDay}">
+                <ItemsControl ItemsSource="{Binding Path=WeatherThirdDay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:ForecastWeatherControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+
+            <TabItem Header="{Binding FourthDay}">
+                <ItemsControl ItemsSource="{Binding Path=WeatherFourthDay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:ForecastWeatherControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+        </TabControl>
+
+        <Label Content="{Binding ExceptionInfo}" Grid.Row="4" Margin="0 2 0 10" HorizontalAlignment="Center" Foreground="Red"/>
+    </Grid>
+</Window>
