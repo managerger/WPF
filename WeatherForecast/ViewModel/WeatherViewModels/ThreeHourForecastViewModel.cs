@@ -21,13 +21,16 @@ namespace ViewModel.WeatherViewModels
 
         public ThreeHourForecastViewModel(ThreeHourForecastDTO time)
         {
-            this.Date = time.Date;
-            this.Humidity = time.Humidity;
-            this.Icon = time.Icon;
-            this.Pressure = (int)time.Pressure;
-            this.TemperatureMax = time.TemperatureMax;
-            this.TemperatureMin = time.TemperatureMin;
-            this.WindSpeed = time.WindSpeed;
+            if (time != null)
+            {
+                this.Date = time.Date;
+                this.Humidity = time.Humidity;
+                this.Icon = time.Icon;
+                this.Pressure = (int)time.Pressure;
+                this.TemperatureMax = time.TemperatureMax;
+                this.TemperatureMin = time.TemperatureMin;
+                this.WindSpeed = time.WindSpeed;
+            }
         }
     }
 }

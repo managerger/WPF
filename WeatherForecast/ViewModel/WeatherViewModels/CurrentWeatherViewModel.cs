@@ -18,12 +18,15 @@ namespace ViewModel.WeatherViewModels
 
         public CurrentWeatherViewModel(CurrentWeatherDTO currentWeather)
         {
-            this.CityName = currentWeather.City;
-            this.Humidity = currentWeather.Humidity;
-            this.Icon = currentWeather.Icon;
-            this.Pressure = (int)currentWeather.Pressure;
-            this.Temperature = currentWeather.Temperature;
-            this.WindSpeed = currentWeather.WindSpeed;
+            if (currentWeather != null)
+            {
+                this.CityName = currentWeather.City;
+                this.Humidity = currentWeather.Humidity;
+                this.Icon = currentWeather.Icon;
+                this.Pressure = (int)currentWeather.Pressure;
+                this.Temperature = currentWeather.Temperature;
+                this.WindSpeed = currentWeather.WindSpeed;
+            }
         }   
     }
 }

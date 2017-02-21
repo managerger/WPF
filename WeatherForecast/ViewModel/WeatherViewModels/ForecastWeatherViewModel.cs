@@ -33,9 +33,12 @@ namespace ViewModel.WeatherViewModels
 
         public ForecastWeatherViewModel(FiveDayForecastDTO fiveDayForecast)
         {
-            this.minDateInForecast = fiveDayForecast.WeatherInfos.Min(d => d.Date);
-            this.CityName = fiveDayForecast.City;
-            this.SetWeatherByDays(fiveDayForecast.WeatherInfos);
+            if (fiveDayForecast != null && fiveDayForecast.WeatherInfos != null)
+            {
+                this.minDateInForecast = fiveDayForecast.WeatherInfos.Min(d => d.Date);
+                this.CityName = fiveDayForecast.City;
+                this.SetWeatherByDays(fiveDayForecast.WeatherInfos);
+            }
         }
 
         private void SetWeatherByDays(ICollection<ThreeHourForecastDTO> weatherForecast)
