@@ -117,6 +117,8 @@ namespace ViewModel.WeatherViewModels
                 this.CitiesWeather.Add(currentWeather);
                 this.CityName = string.Empty;
             }
+
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private async Task AddForecastAsync(object cityName)
