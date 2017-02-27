@@ -58,9 +58,9 @@ namespace ViewModel.WeatherViewModels
 
         private ICollection<ThreeHourForecastViewModel> GetThreeHourForecastPerDay(ICollection<ThreeHourForecastDTO> weatherForecast, int dayNumber)
         {
-            var minDay = this.minDateInForecast.Day;
+            var forecastDate = this.minDateInForecast.AddDays(dayNumber).ToShortDateString();
 
-            return weatherForecast.Where(day => day.Date.Day == minDay + dayNumber).Select(day => new ThreeHourForecastViewModel(day)).ToList();
+            return weatherForecast.Where(day => day.Date.ToShortDateString() == forecastDate).Select(day => new ThreeHourForecastViewModel(day)).ToList();
         }
 
         private enum ForecastDayNumbers
